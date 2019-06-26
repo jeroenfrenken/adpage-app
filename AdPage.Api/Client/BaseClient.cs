@@ -2,24 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using AdPage.Api.Configuration;
 using AdPage.Api.Model;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace AdPage.Api.Client
 {
-    
     public class BaseClient
     {
-
-        private ApiConfiguration _configuration;
         private RestClient _client;
-
-        public void Init(ApiConfiguration configuration)
+        
+        private string _apiKey { get; set; }
+        
+        public BaseClient()
         {
-            _configuration = configuration;
-            _client = new RestClient(configuration.url);
-            _client.AddDefaultHeader("x-api-key", configuration.apiKey);
+            _client = new RestClient("https://app.fastpages.io/api");
         }
         
         public void HandleException<T>(IRestResponse<T> result)
@@ -35,10 +32,17 @@ namespace AdPage.Api.Client
             }
         }
 
+        public void setApiKey(string apiKey)
+        {
+            _apiKey = apiKey;
+        }
+
         private Task<T> AsyncCall<T>(string url, Method method) where T : new()
         {
             var taskCompletionSource = new TaskCompletionSource<T>();
-            _client.ExecuteAsync<T>(new RestRequest(url, method, DataFormat.Json),
+            var request = new RestRequest(url, method, DataFormat.Json);
+            request.AddHeader("x-api-key", _apiKey);
+            _client.ExecuteAsync<T>(request,
                 response =>
                 {
                     HandleException(response);
@@ -47,24 +51,28 @@ namespace AdPage.Api.Client
             return taskCompletionSource.Task;
         }
 
-        public Task<AgencyDto> GetAgency()
+        public Task<UserDto> GetUser()
         {
-            return AsyncCall<AgencyDto>("/agency", Method.GET);
+            return AsyncCall<UserDto>("/user", Method.GET);
+        }
+
+        public Task<UserWithTokenDto> AuthenticateUser(UserLoginDto loginDto)
+        {
+            var taskCompletionSource = new TaskCompletionSource<UserWithTokenDto>();
+            var request = new RestRequest("/authentication/login", Method.POST, DataFormat.Json);
+            request.AddParameter("application/json", JsonConvert.SerializeObject(loginDto), ParameterType.RequestBody);
+            _client.ExecuteAsync<UserWithTokenDto>(request,
+                response =>
+                {
+                    HandleException(response);
+                    taskCompletionSource.SetResult(response.Data);
+                });
+            return taskCompletionSource.Task;
         }
 
         public Task<List<ProjectDto>> GetProjects()
         {
             return AsyncCall<List<ProjectDto>>("/project", Method.GET);
-        }
-
-        public Task<ProjectDto> GetProject(string uuid)
-        {
-            return AsyncCall<ProjectDto>($"/project/{uuid}", Method.GET);
-        }
-
-        public Task<ProjectDto> PublishUnPublishProject(string uuid)
-        {
-            return AsyncCall<ProjectDto>($"/project/{uuid}/publish", Method.PUT);
         }
 
         public Task<List<Dictionary<string, string>>> GetProjectLeads(string uuid)
@@ -75,15 +83,13 @@ namespace AdPage.Api.Client
         public Task<bool> DeleteLead(string projectUuid, string leadUuid)
         {
             var taskCompletionSource = new TaskCompletionSource<bool>();
-            _client.ExecuteAsync<bool>(new RestRequest($"/project/{projectUuid}/leads/{leadUuid}", Method.PUT, DataFormat.Json),
+            _client.AddDefaultHeader("x-api-key", _apiKey);
+            _client.ExecuteAsync(new RestRequest($"/project/{projectUuid}/leads/{leadUuid}", Method.DELETE),
                 response =>
                 {
-                    HandleException(response);
                     taskCompletionSource.SetResult(response.StatusCode == HttpStatusCode.OK);
                 });
             return taskCompletionSource.Task;
         }
-        
     }
-    
 }

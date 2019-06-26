@@ -7,8 +7,7 @@ namespace AdPage.ViewModels
 {
     public class LeadDetailViewModel: BaseViewModel
     {
-
-
+        
         public ProjectLeadDto ProjectLeadDto;
 
         public LeadDetailViewModel(ProjectLeadDto projectLeadDto = null)
@@ -17,16 +16,15 @@ namespace AdPage.ViewModels
             ProjectLeadDto = projectLeadDto;
         }
         
-        
-        async Task LoadProjectLeads()
+        public async Task<bool> DeleteLead()
         {
             try
             {
-                var projectLeads = await ApiClient.Instance.DeleteLead(ProjectLeadDto.ProjectUuid, ProjectLeadDto.Uuid);
+                return await ApiClient.Instance.DeleteLead(ProjectLeadDto.ProjectUuid, ProjectLeadDto.Uuid);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                return false;
             }
         }
         

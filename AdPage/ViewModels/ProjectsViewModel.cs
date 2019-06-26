@@ -4,16 +4,17 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using AdPage.Api.Client;
 using AdPage.Api.Model;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace AdPage.ViewModels
 {
-    public class ProjectsViewModal : BaseViewModel
+    public class ProjectsViewModel : BaseViewModel
     {
         public ObservableCollection<ProjectDto> Projects { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ProjectsViewModal()
+        public ProjectsViewModel()
         {
             Title = "Projects";
             Projects = new ObservableCollection<ProjectDto>();
@@ -31,9 +32,15 @@ namespace AdPage.ViewModels
             {
                 Projects.Clear();
                 var projects = await ApiClient.Instance.GetProjects();
-                foreach (var item in projects)
+                if (projects.Count > 0)
                 {
-                    Projects.Add(item);
+                    foreach (var item in projects)
+                    {
+                        if (item.uuid != null)
+                        {
+                            Projects.Add(item);    
+                        }
+                    }    
                 }
             }
             catch (Exception ex)

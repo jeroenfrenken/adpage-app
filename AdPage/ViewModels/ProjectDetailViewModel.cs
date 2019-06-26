@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AdPage.Api.Client;
 using AdPage.Api.Model;
-using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace AdPage.ViewModels

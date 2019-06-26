@@ -1,9 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using AdPage.Api.Client;
-using AdPage.Api.Configuration;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AdPage.Views
 {
@@ -15,6 +11,12 @@ namespace AdPage.Views
         public MainPage()
         {
             InitializeComponent();
+            PopupLogin();
+        }
+
+        async void PopupLogin()
+        {
+            await Navigation.PushModalAsync(new LoginPage());
         }
     }
 }

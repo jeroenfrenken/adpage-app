@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using AdPage.Api.Model;
 using Xamarin.Forms;
 using AdPage.ViewModels;
@@ -10,13 +11,13 @@ namespace AdPage.Views
     [DesignTimeVisible(false)]
     public partial class ProjectsPage : ContentPage
     {
-        ProjectsViewModal viewModel;
+        ProjectsViewModel viewModel;
 
         public ProjectsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ProjectsViewModal();
+            BindingContext = viewModel = new ProjectsViewModel();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -34,7 +35,6 @@ namespace AdPage.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             if (viewModel.Projects.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }

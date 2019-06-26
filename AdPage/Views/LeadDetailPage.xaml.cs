@@ -1,3 +1,4 @@
+using System;
 using AdPage.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,8 +24,13 @@ namespace AdPage.Views
                 });
             }
         }
-        
-        
+
+        async void Delete(object sender, EventArgs args)
+        {
+            var res = await viewModel.DeleteLead();
+            if (res)
+                await Navigation.PopAsync();
+        } 
         
     }
 }

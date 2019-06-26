@@ -22,25 +22,17 @@ namespace AdPage.Views
         public ProjectDetailPage()
         {
             InitializeComponent();
-
-            var project = new ProjectDto
-            {
-                uuid = "test",
-                name = "Test",
-                published = false
-            };
-
-            viewModel = new ProjectDetailViewModel(project);
+            viewModel = new ProjectDetailViewModel();
             BindingContext = viewModel;
         }
         
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var ProjectLeadDto = args.SelectedItem as ProjectLeadDto;
-            if (ProjectLeadDto == null)
+            var projectLeadDto = args.SelectedItem as ProjectLeadDto;
+            if (projectLeadDto == null)
                 return;
 
-            await Navigation.PushAsync(new LeadDetailPage(new LeadDetailViewModel(ProjectLeadDto)));
+            await Navigation.PushAsync(new LeadDetailPage(new LeadDetailViewModel(projectLeadDto)));
 
             LeadsListView.SelectedItem = null;
         }
@@ -48,9 +40,7 @@ namespace AdPage.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (viewModel.Leads.Count == 0)
-                viewModel.LoadLeadCommand.Execute(null);
+            viewModel.LoadLeadCommand.Execute(null);
         }
     }
 }

@@ -3,14 +3,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="{Binding Title}"
-             x:Class="AdPage.Views.LeadDetailPage">
+             x:Class="AdPage.Views.UserPage">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout x:Name="LeadProperties"></StackLayout>
+            <Label 
+                Text="{Binding UserDto.email}"
+            />
             <Button 
                 Margin="0,10,0,0" 
-                Text="Delete lead" 
-                Clicked="Delete" 
+                Text="Logout" 
+                Clicked="Logout"
                 BackgroundColor="#e74c3c" 
                 TextColor="White" 
             />
