@@ -67,9 +67,9 @@ namespace AdPage.Api.Client
             return AsyncCall<ProjectDto>($"/project/{uuid}/publish", Method.PUT);
         }
 
-        public Task<ProjectLeadDto> GetProjectLeads(string uuid)
+        public Task<List<Dictionary<string, string>>> GetProjectLeads(string uuid)
         {
-            return AsyncCall<ProjectLeadDto>($"/project/{uuid}/leads", Method.GET);
+            return AsyncCall<List<Dictionary<string, string>>>($"/project/{uuid}/leads?format", Method.GET);
         }
 
         public Task<bool> DeleteLead(string projectUuid, string leadUuid)

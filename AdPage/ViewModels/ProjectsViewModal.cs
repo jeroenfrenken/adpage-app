@@ -8,12 +8,12 @@ using Xamarin.Forms;
 
 namespace AdPage.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ProjectsViewModal : BaseViewModel
     {
         public ObservableCollection<ProjectDto> Projects { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ProjectsViewModal()
         {
             Title = "Projects";
             Projects = new ObservableCollection<ProjectDto>();

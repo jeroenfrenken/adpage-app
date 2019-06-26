@@ -8,15 +8,15 @@ namespace AdPage.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class ItemsPage : ContentPage
+    public partial class ProjectsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        ProjectsViewModal viewModel;
 
-        public ItemsPage()
+        public ProjectsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ProjectsViewModal();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -25,10 +25,10 @@ namespace AdPage.Views
             if (project == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(project)));
+            await Navigation.PushAsync(new ProjectDetailPage(new ProjectDetailViewModel(project)));
 
             // Manually deselect item.
-            ItemsListView.SelectedItem = null;
+            ProjectsListView.SelectedItem = null;
         }
         
         protected override void OnAppearing()
