@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
+﻿using AdPage.UITests.Pages;
+using NUnit.Framework;
 using Xamarin.UITest;
 
-namespace AdPage.UITests
+namespace AdPage.UITests.Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
@@ -11,7 +12,7 @@ namespace AdPage.UITests
         protected IApp app;
         protected Platform platform;
 
-        protected ItemsPage ItemsPage;
+        protected LoginPage LoginPage;
         protected NewItemPage NewItemPage;
 
         protected BaseTest(Platform platform)
@@ -22,10 +23,14 @@ namespace AdPage.UITests
         [SetUp]
         virtual public void BeforeEachTest()
         {
+            if (platform == Platform.Android)
+            {
+//                app = ConfigureApp.iOS.AppBundle(path).DeviceIdentifier("B1F11589-E9D8-4FE8-A26E-C648C117D061").StartApp();
+            }
             app = AppInitializer.StartApp(platform);
             app.Screenshot("App Initialized");
 
-            ItemsPage = new ItemsPage(app, platform);
+            LoginPage = new LoginPage(app, platform);
             NewItemPage = new NewItemPage(app, platform);
         }
     }

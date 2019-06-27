@@ -23,7 +23,7 @@ namespace AdPage.ViewModels
             UserCommand = new Command(async () => await GetAccount());
         }
 
-        async Task GetAccount()
+        public async Task GetAccount()
         {
             try
             {
@@ -31,8 +31,12 @@ namespace AdPage.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
             }
+        }
+
+        public void LogoutUser()
+        {
+            ApiClient.Instance.setApiKey("");
         }
     }
 }

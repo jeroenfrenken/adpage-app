@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using AdPage.Api.Client;
 using AdPage.Api.Model;
-using Xamarin.Forms;
 
 namespace AdPage.ViewModels
 {

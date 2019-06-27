@@ -23,7 +23,8 @@ namespace AdPage.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Xamarin.Calabash.Start();
-            global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.Forms.Init();
+            XF.Material.iOS.Material.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

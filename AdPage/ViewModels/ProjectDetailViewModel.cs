@@ -50,7 +50,6 @@ namespace AdPage.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
             }
             finally
             {

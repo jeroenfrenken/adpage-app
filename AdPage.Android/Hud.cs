@@ -3,19 +3,17 @@ using AdPage.Droid;
 using AdPage.Interfaces;
 using AndroidHUD;
 using Xamarin.Forms;
-using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(Hud))]
 namespace AdPage.Droid
 {
     public class Hud : IHud
     {
-
         public void Show(string message) 
         {
             Device.BeginInvokeOnMainThread (() =>
             {
-                AndHUD.Shared.Show(Application.Context, "Status Message", (int) MaskType.Clear);
+                AndHUD.Shared.Show(MainApplication.ActivityContext, message, (int) MaskType.Clear);
             });
         }
 
@@ -23,7 +21,7 @@ namespace AdPage.Droid
         {
             Device.BeginInvokeOnMainThread (() =>
             {
-                AndHUD.Shared.ShowError(Application.Context, message, MaskType.Clear, TimeSpan.FromSeconds(1.2));
+                AndHUD.Shared.ShowError(MainApplication.ActivityContext, message, MaskType.Clear, TimeSpan.FromSeconds(1.2));
             });   
         }
 
@@ -31,7 +29,7 @@ namespace AdPage.Droid
         {
             Device.BeginInvokeOnMainThread (() =>
             {
-                AndHUD.Shared.ShowSuccess(Application.Context, message, MaskType.Clear, TimeSpan.FromSeconds(1.2));
+                AndHUD.Shared.ShowSuccess(MainApplication.ActivityContext, message, MaskType.Clear, TimeSpan.FromSeconds(1.2));
             });
         }
 
@@ -39,7 +37,7 @@ namespace AdPage.Droid
         {
             Device.BeginInvokeOnMainThread (() =>
             {
-                AndHUD.Shared.Dismiss(Application.Context);
+                AndHUD.Shared.Dismiss(MainApplication.ActivityContext);
             });
         }
     }

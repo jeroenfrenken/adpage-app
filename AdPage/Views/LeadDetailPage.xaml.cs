@@ -26,7 +26,7 @@ namespace AdPage.Views
             }
         }
 
-        async void Delete(object sender, EventArgs args)
+        public async void Delete(object sender, EventArgs args)
         {
             var hud = DependencyService.Get<IHud>();
             hud.Show("Loading...");

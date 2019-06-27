@@ -21,7 +21,7 @@ namespace AdPage.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        async Task ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -45,7 +45,7 @@ namespace AdPage.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                
             }
             finally
             {

@@ -1,6 +1,7 @@
 ﻿using Xamarin.UITest;
+using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
 
-namespace AdPage.UITests
+namespace AdPage.UITests.Pages
 {
     public abstract class BasePage
     {
@@ -25,6 +26,13 @@ namespace AdPage.UITests
         public void WaitForPageToLoad()
         {
             app.WaitForElement(pageTitle);
+        }
+        
+        protected void EnterText(Query textBoxQuery, string text)
+        {
+            app.ClearText(textBoxQuery);
+            app.EnterText(textBoxQuery, text);
+            app.DismissKeyboard();
         }
     }
 }

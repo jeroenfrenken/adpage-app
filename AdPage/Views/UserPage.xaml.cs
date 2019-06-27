@@ -1,5 +1,4 @@
 using System;
-using AdPage.Api.Client;
 using AdPage.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,13 +13,12 @@ namespace AdPage.Views
         public UserPage()
         {
             InitializeComponent();
-
             BindingContext = viewModel = new UserViewModel();
         }
 
         async void Logout(object sender, EventArgs args)
         {
-            ApiClient.Instance.setApiKey("");
+            viewModel.LogoutUser();
             await Navigation.PushModalAsync(new LoginPage());
         }
         

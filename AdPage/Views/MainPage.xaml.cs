@@ -1,42 +1,35 @@
-﻿using System;
-using System.ComponentModel;
-using AdPage.Api.Client;
+﻿using System.ComponentModel;
 using AdPage.Interfaces;
+using AdPage.ViewModels;
 using Xamarin.Forms;
 
 namespace AdPage.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
         private bool _checked = false;
         
+        MainPageViewModel viewModel;
+        
         public MainPage()
         {
             InitializeComponent();
+            
+            BindingContext = viewModel = new MainPageViewModel();
         }
 
         async void PopupLogin()
         {
             var hud = DependencyService.Get<IHud>();
             hud.Show ("Loading Account");
-            try
-            {
-                var user = await ApiClient.Instance.GetUser();
-                if (user.uuid == null)
-                {
-                    await Navigation.PushModalAsync(new LoginPage());
-                }
-            }
-            catch (Exception e)
+
+            var res = await viewModel.CheckIfTokenValid();
+
+            hud.Dismiss();
+            if (!res)
             {
                 await Navigation.PushModalAsync(new LoginPage());
-            }
-            finally
-            {
-                hud.Dismiss();
             }
         }
         

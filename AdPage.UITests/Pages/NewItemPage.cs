@@ -2,7 +2,7 @@
 
 using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
 
-namespace AdPage.UITests
+namespace AdPage.UITests.Pages
 {
     public class NewItemPage : BasePage
     {

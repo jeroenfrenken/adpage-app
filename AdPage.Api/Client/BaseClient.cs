@@ -26,7 +26,7 @@ namespace AdPage.Api.Client
             _apiKey = AuthenticationSettings.GetValueOrDefault(API_SETTINGS, string.Empty);
         }
         
-        public void HandleException<T>(IRestResponse<T> result)
+        private void HandleException<T>(IRestResponse<T> result)
         {
             if (result.ErrorException != null)
             {
