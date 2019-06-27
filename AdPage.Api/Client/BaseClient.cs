@@ -4,19 +4,26 @@ using System.Net;
 using System.Threading.Tasks;
 using AdPage.Api.Model;
 using Newtonsoft.Json;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
 using RestSharp;
 
 namespace AdPage.Api.Client
 {
     public class BaseClient
     {
+        private const string API_SETTINGS = "API_SETTINGS";
+        
         private RestClient _client;
+
+        private static ISettings AuthenticationSettings => CrossSettings.Current;
         
         private string _apiKey { get; set; }
         
         public BaseClient()
         {
             _client = new RestClient("https://app.fastpages.io/api");
+            _apiKey = AuthenticationSettings.GetValueOrDefault(API_SETTINGS, string.Empty);
         }
         
         public void HandleException<T>(IRestResponse<T> result)
@@ -35,6 +42,7 @@ namespace AdPage.Api.Client
         public void setApiKey(string apiKey)
         {
             _apiKey = apiKey;
+            AuthenticationSettings.AddOrUpdateValue(API_SETTINGS, apiKey);
         }
 
         private Task<T> AsyncCall<T>(string url, Method method) where T : new()

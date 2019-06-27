@@ -1,4 +1,5 @@
 using System;
+using AdPage.Interfaces;
 using AdPage.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -27,9 +28,18 @@ namespace AdPage.Views
 
         async void Delete(object sender, EventArgs args)
         {
+            var hud = DependencyService.Get<IHud>();
+            hud.Show("Loading...");
             var res = await viewModel.DeleteLead();
             if (res)
+            {
                 await Navigation.PopAsync();
+                hud.Success("Success");
+            }
+            else
+            {
+                hud.Error("Failed to delete");
+            }
         } 
         
     }

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using AdPage.Api.Client;
+using AdPage.Interfaces;
 using Xamarin.Forms;
 
 namespace AdPage.Views
@@ -8,15 +11,44 @@ namespace AdPage.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        private bool _checked = false;
+        
         public MainPage()
         {
             InitializeComponent();
-            PopupLogin();
         }
 
         async void PopupLogin()
         {
-            await Navigation.PushModalAsync(new LoginPage());
+            var hud = DependencyService.Get<IHud>();
+            hud.Show ("Loading Account");
+            try
+            {
+                var user = await ApiClient.Instance.GetUser();
+                if (user.uuid == null)
+                {
+                    await Navigation.PushModalAsync(new LoginPage());
+                }
+            }
+            catch (Exception e)
+            {
+                await Navigation.PushModalAsync(new LoginPage());
+            }
+            finally
+            {
+                hud.Dismiss();
+            }
+        }
+        
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (!_checked)
+            {
+                _checked = true;
+                PopupLogin();    
+            }
+            
         }
     }
 }
