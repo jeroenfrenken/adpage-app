@@ -8,7 +8,7 @@ namespace AdPage.UnitTest
     public class ProjectsViewModelTest
     {
         
-        private ProjectsViewModel _projectsViewModel = new ProjectsViewModel();
+        private readonly ProjectsViewModel _projectsViewModel = new ProjectsViewModel();
         
         [Fact]
         public async void GetProjects()

@@ -7,7 +7,7 @@ namespace AdPage.UnitTest
     public class LoginViewModelTest
     {
         
-        private LoginViewModel _loginViewModel = new LoginViewModel();
+        private readonly LoginViewModel _loginViewModel = new LoginViewModel();
 
         [Fact]
         public void EmailSetCorrect()
