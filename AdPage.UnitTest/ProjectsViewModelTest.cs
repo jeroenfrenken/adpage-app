@@ -14,7 +14,7 @@ namespace AdPage.UnitTest
         public async void GetProjects()
         {
             ApiClient.Instance.setApiKey(
-                "lTsJlhD9sJ1J43xxPz8zZG9THyNMqR98nmiA7viR6wwcGfqdVsVdLUkBot5t2QeLLcKxUgsavURm82Ka9psp5LNo4sOmd9zWjEAC0V1y4gJ64FgflLOjWUbWYgwTWSJT"
+                "TOKEN"
             );
             
             await _projectsViewModel.ExecuteLoadItemsCommand();

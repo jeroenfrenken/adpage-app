@@ -12,7 +12,7 @@ namespace AdPage.UnitTest
         [Fact]
         public void EmailSetCorrect()
         {
-            const string email = "jeroenfrenken@icloud.com";
+            const string email = "EMAIL";
             _loginViewModel.Email = email;
             Assert.Equal(email, _loginViewModel.Email);
         }
@@ -20,7 +20,7 @@ namespace AdPage.UnitTest
         [Fact]
         public void PasswordSetCorrect()
         {
-            const string password = "jeroenfrenken@icloud.com";
+            const string password = "PASSWORD";
             _loginViewModel.Password = password;
             Assert.Equal(password, _loginViewModel.Password);
         }
@@ -28,8 +28,8 @@ namespace AdPage.UnitTest
         [Fact]
         public async void LoginSuccessTest()
         {
-            _loginViewModel.Email = "jeroenfrenken@icloud.com";
-            _loginViewModel.Password = "Fastpages12";
+            _loginViewModel.Email = "EMAIL";
+            _loginViewModel.Password = "PASSWORD";
             var res = await _loginViewModel.Login();
             Assert.True(res);
         }
