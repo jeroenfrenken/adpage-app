@@ -12,18 +12,18 @@ namespace AdPage.Api.Client
 {
     public class BaseClient
     {
-        private const string API_SETTINGS = "API_SETTINGS";
+        private const string ApiSettings = "API_SETTINGS";
         
         private RestClient _client;
 
         private static ISettings AuthenticationSettings => CrossSettings.Current;
         
-        private string _apiKey { get; set; }
+        private string ApiKey { get; set; }
         
         public BaseClient()
         {
             _client = new RestClient("https://app.fastpages.io/api");
-            _apiKey = AuthenticationSettings.GetValueOrDefault(API_SETTINGS, string.Empty);
+            ApiKey = AuthenticationSettings.GetValueOrDefault(ApiSettings, string.Empty);
         }
         
         private void HandleException<T>(IRestResponse<T> result)
@@ -41,15 +41,15 @@ namespace AdPage.Api.Client
 
         public void setApiKey(string apiKey)
         {
-            _apiKey = apiKey;
-            AuthenticationSettings.AddOrUpdateValue(API_SETTINGS, apiKey);
+            ApiKey = apiKey;
+            AuthenticationSettings.AddOrUpdateValue(ApiSettings, apiKey);
         }
 
         private Task<T> AsyncCall<T>(string url, Method method) where T : new()
         {
             var taskCompletionSource = new TaskCompletionSource<T>();
             var request = new RestRequest(url, method, DataFormat.Json);
-            request.AddHeader("x-api-key", _apiKey);
+            request.AddHeader("x-api-key", ApiKey);
             _client.ExecuteAsync<T>(request,
                 response =>
                 {
@@ -91,7 +91,7 @@ namespace AdPage.Api.Client
         public Task<bool> DeleteLead(string projectUuid, string leadUuid)
         {
             var taskCompletionSource = new TaskCompletionSource<bool>();
-            _client.AddDefaultHeader("x-api-key", _apiKey);
+            _client.AddDefaultHeader("x-api-key", ApiKey);
             _client.ExecuteAsync(new RestRequest($"/project/{projectUuid}/leads/{leadUuid}", Method.DELETE),
                 response =>
                 {

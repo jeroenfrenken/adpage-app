@@ -24,7 +24,7 @@ namespace AdPage.ViewModels
             LoadLeadCommand = new Command(async () => await LoadProjectLeads());
         }
 
-        async Task LoadProjectLeads()
+        private async Task LoadProjectLeads()
         {
             if (IsBusy)
                 return;

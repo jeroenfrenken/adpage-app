@@ -8,24 +8,24 @@ namespace AdPage.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserPage : ContentPage
     {
-        UserViewModel viewModel;
+        private UserViewModel _viewModel;
 
         public UserPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new UserViewModel();
+            BindingContext = _viewModel = new UserViewModel();
         }
 
-        async void Logout(object sender, EventArgs args)
+        private async void Logout(object sender, EventArgs args)
         {
-            viewModel.LogoutUser();
+            _viewModel.LogoutUser();
             await Navigation.PushModalAsync(new LoginPage());
         }
         
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.UserCommand.Execute(null);
+            _viewModel.UserCommand.Execute(null);
         }
     }
 }

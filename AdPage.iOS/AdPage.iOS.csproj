@@ -148,6 +148,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\AdPage.Api\AdPage.Api.csproj">
+      <Project>{957946f5-ad40-4f1d-890c-f14a9dc60244}</Project>
+      <Name>AdPage.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdPage\AdPage.csproj">
       <Project>{7082C3A7-DACE-4DF5-8491-81E4679D7FDB}</Project>
       <Name>AdPage</Name>

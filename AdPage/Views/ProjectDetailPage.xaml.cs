@@ -8,23 +8,23 @@ namespace AdPage.Views
     [DesignTimeVisible(false)]
     public partial class ProjectDetailPage : ContentPage
     {
-        ProjectDetailViewModel viewModel;
+        private ProjectDetailViewModel _viewModel;
 
         public ProjectDetailPage(ProjectDetailViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = this._viewModel = viewModel;
         }
 
         public ProjectDetailPage()
         {
             InitializeComponent();
-            viewModel = new ProjectDetailViewModel();
-            BindingContext = viewModel;
+            _viewModel = new ProjectDetailViewModel();
+            BindingContext = _viewModel;
         }
         
-        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var projectLeadDto = args.SelectedItem as ProjectLeadDto;
             if (projectLeadDto == null)
@@ -38,7 +38,7 @@ namespace AdPage.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadLeadCommand.Execute(null);
+            _viewModel.LoadLeadCommand.Execute(null);
         }
     }
 }

@@ -4,14 +4,17 @@ namespace AdPage.Api.Client
     public sealed class ApiClient
     {
 
-        private static BaseClient _instance = null;
-        private static readonly object _padlock = new object();
+        private static BaseClient _instance;
+        private static readonly object PadLock = new object();
 
+        /*
+         * Hold a instance of the BaseClient in a static context for easy access in the application
+         */
         public static BaseClient Instance
         {
             get
             {
-                lock (_padlock)
+                lock (PadLock)
                 {
                     if (_instance == null)
                     {

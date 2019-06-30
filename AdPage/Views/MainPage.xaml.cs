@@ -10,21 +10,25 @@ namespace AdPage.Views
     {
         private bool _checked = false;
         
-        MainPageViewModel viewModel;
+        private MainPageViewModel _viewModel;
         
         public MainPage()
         {
             InitializeComponent();
-            
-            BindingContext = viewModel = new MainPageViewModel();
+            BindingContext = _viewModel = new MainPageViewModel();
         }
 
-        async void PopupLogin()
+        /**
+         * Checks if a token that is in localstorage is still valid.
+         *
+         * Else it will launch the login page
+         */
+        private async void CheckAccountToken()
         {
             var hud = DependencyService.Get<IHud>();
             hud.Show ("Loading Account");
 
-            var res = await viewModel.CheckIfTokenValid();
+            var res = await _viewModel.CheckIfTokenValid();
 
             hud.Dismiss();
             if (!res)
@@ -39,7 +43,7 @@ namespace AdPage.Views
             if (!_checked)
             {
                 _checked = true;
-                PopupLogin();    
+                CheckAccountToken();    
             }
             
         }

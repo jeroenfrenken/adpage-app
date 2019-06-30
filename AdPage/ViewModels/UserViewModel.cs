@@ -11,8 +11,8 @@ namespace AdPage.ViewModels
         private UserDto userDto;
         public UserDto UserDto
         {
-            get { return userDto; }
-            set { SetProperty(ref userDto, value); }
+            get => userDto;
+            set => SetProperty(ref userDto, value);
         }
 
         public Command UserCommand { get; set; }
@@ -23,7 +23,7 @@ namespace AdPage.ViewModels
             UserCommand = new Command(async () => await GetAccount());
         }
 
-        public async Task GetAccount()
+        private async Task GetAccount()
         {
             try
             {
@@ -31,6 +31,7 @@ namespace AdPage.ViewModels
             }
             catch (Exception e)
             {
+                UserDto = new UserDto();
             }
         }
 

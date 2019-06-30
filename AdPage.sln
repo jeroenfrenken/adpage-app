@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.Android", "AdPage.Android\AdPage.Android.csproj", "{E301E3C9-41C0-450F-911D-B0B2829DC0FB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.iOS", "AdPage.iOS\AdPage.iOS.csproj", "{93367450-8857-413E-82AA-3D872BB4603D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage", "AdPage\AdPage.csproj", "{7082C3A7-DACE-4DF5-8491-81E4679D7FDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.Api", "AdPage.Api\AdPage.Api.csproj", "{957946F5-AD40-4F1D-890C-F14A9DC60244}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.UnitTest", "AdPage.UnitTest\AdPage.UnitTest.csproj", "{423C8930-FF19-46ED-8A1B-CBEEC43E41C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.Android", "AdPage.Android\AdPage.Android.csproj", "{E301E3C9-41C0-450F-911D-B0B2829DC0FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdPage.iOS", "AdPage.iOS\AdPage.iOS.csproj", "{93367450-8857-413E-82AA-3D872BB4603D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

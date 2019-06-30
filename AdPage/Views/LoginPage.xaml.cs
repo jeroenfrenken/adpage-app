@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AdPage.Interfaces;
 using AdPage.ViewModels;
 using Xamarin.Forms;
@@ -21,7 +17,7 @@ namespace AdPage.Views
             BindingContext = viewModel = new LoginViewModel();
         }
 
-        public async void OnSubmit(object sender, EventArgs args)
+        private async void OnSubmit(object sender, EventArgs args)
         {
             var hud = DependencyService.Get<IHud>();
             hud.Show("Loading...");

@@ -32,7 +32,7 @@
                 FontAttributes="Bold"
                 FontSize="Large" 
                 HorizontalOptions="FillAndExpand"  
-                BackgroundColor="#088da5"
+                BackgroundColor="#2f3260"
             />  
         </StackLayout>  
     </ContentPage.Content>
